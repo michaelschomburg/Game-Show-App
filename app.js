@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let missed = 0;
 
   var phrases = [
-    "January is a nice month",
-    "Februrary is a nice month",
-    "April is a nice month",
-    "November is a nice month",
-    "August is a nice month",
-    "October is a nice month",
-    "December is a nice month"
+    "January",
+    "Februrary",
+    "April",
+    "November",
+    "August",
+    "October",
+    "December"
 
   ];
 
