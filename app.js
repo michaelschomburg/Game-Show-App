@@ -1,12 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const qwerty = document.getElementById('qwerty');
-  const phrase = document.getElementById('phrase');
-  const startButton = document.querySelector('.btn__reset');
-  const lifes = document.getElementById('scoreboard');
-  const tries = document.getElementsByClassName('tries');
-  const overlay = document.getElementById('overlay');
-  const title = document.querySelector('.title');
+  const qwerty = document.getElementById("qwerty");
+  const phrase = document.getElementById("phrase");
+  const startButton = document.querySelector(".btn__reset");
+  const lifes = document.getElementById("scoreboard");
+  const overlay = document.getElementById("overlay");
+  const title = document.querySelector(".title");
   let missed = 0;
 
   var phrases = [
@@ -46,18 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Eventlistener which fades and sets display to none of the overlay
 
-  startButton.addEventListener('click', () => {
+  startButton.addEventListener("click", () => {
     //setting missed always back to 0
     missed = 0;
     //fade the overlay away
-    const overley = document.getElementById('overlay');
-    setTimeout(function() {
-      overlay.style.display = 'none'
-    }, 1000);
-    overlay.classList.add('fade');
+    const overley = document.getElementById("overlay");
+    setTimeout(() => {
+      overlay.style.display = "none"}, 1000);
+      overlay.classList.add("fade");
     // clear the phrase list
-    let lettersInList = document.getElementsByClassName('letter');
-    let spacesInList = document.getElementsByClassName('space');
+    let lettersInList = document.getElementsByClassName("letter");
+    let spacesInList = document.getElementsByClassName("space");
 
     for (let i = lettersInList.length - 1; i >= 0; i--) {
       lettersInList[i].parentNode.removeChild(lettersInList[i]);
@@ -71,10 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
     addPhraseToDisplay(phraseArray)
 
     // clear the keyboard
-    let keys = document.querySelectorAll('BUTTON');
+    let keys = document.querySelectorAll("BUTTON");
 
     for (let i = 0; i < keys.length; i++) {
-      keys[i].removeAttribute('class');
+      keys[i].removeAttribute("class");
       keys[i].removeAttribute("disabled");
     }
 
@@ -89,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // checks if the letter clicked matches any letter in the phrase
   function checkLetter(target) {
-    const letter = document.querySelectorAll('.letter');
+    const letter = document.querySelectorAll(".letter");
     const clickedLetter = target.textContent;
     let letterFound = null;
 
@@ -106,35 +104,35 @@ document.addEventListener('DOMContentLoaded', () => {
   function winLose(className, resultText) {
     overlay.classList = className;
     overlay.style.display = "flex";
-    startButton.textContent = 'Reset';
+    startButton.textContent = "Reset";
     title.innerHTML = resultText;
   }
 
 
 
   function checkWin() {
-    const hasLetterClass = document.querySelectorAll('.letter');
-    const hasShowClass = document.querySelectorAll('.show');
+    const hasLetterClass = document.querySelectorAll(".letter");
+    const hasShowClass = document.querySelectorAll(".show");
     if (hasLetterClass.length === hasShowClass.length) {
-      winLose('win', "You win yeaaaah")
+      winLose("win", "You win yeaaaah")
     }
     if (missed >= 5) {
-      winLose('lose', "Oh dear maybe next time")
+      winLose("lose", "Oh dear maybe next time")
     }
   }
 
   // Eventlistener for each clicked Button
 
-  qwerty.addEventListener('click', (e) => {
+  qwerty.addEventListener("click", (e) => {
     const selectedButton = e.target;
     if (selectedButton.tagName === "BUTTON") {
-      selectedButton.classList = 'chosen';
+      selectedButton.classList = "chosen";
       selectedButton.setAttribute("disabled", "");
     }
     checkLetter(selectedButton);
 
     // removing the lifes
-    if (checkLetter(selectedButton) === null && selectedButton.classList.contains('keyrow') != true) { // is this if statement needed or how can I fix the issue that it would take a life if clicked in the gaps
+    if (checkLetter(selectedButton) === null && selectedButton.classList.contains("keyrow") != true) { // is this if statement needed or how can I fix the issue that it would take a life if clicked in the gaps
 
       // lifes.firstElementChild.removeChild(tries[0] );
       lifes.firstElementChild.children[missed].firstElementChild.src = "images/lostHeart.png"
